@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8014dbba-52ff-4532-97a6-537e1e979e02" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="helloworldFlow" doc:id="ca23a7e2-dbe2-4a80-95ff-c78cd840b3eb" >
+		<http:listener doc:name="Listener" doc:id="b1b5a994-4402-46f6-adc9-130bd0bdcb73" config-ref="HTTP_Listener_config" path="/ftp"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ce67d10a-ea9c-4259-acd5-ae75d1cc458e" message="payload"/>
+		<async doc:name="Async" doc:id="24653480-cfdf-49ff-a422-52d48128fa19" >
+			<set-payload value='#["mule"]' doc:name="Set Payload" doc:id="7f6e7d04-ba2f-489f-8f5e-7caa85755672" />
+		</async>
+	</flow>
+</mule>
